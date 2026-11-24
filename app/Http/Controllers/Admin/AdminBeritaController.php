@@ -77,9 +77,20 @@ class AdminBeritaController extends Controller
             'foto'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
+        $kategoriName = trim($v['kategori']);
+        $kat = \App\Models\KategoriBerita::firstOrCreate(
+            ['nama' => $kategoriName],
+            ['slug' => \Illuminate\Support\Str::slug($kategoriName)]
+        );
+
         return [
-            'judul' => $v['judul'], 'kategori' => $v['kategori'], 'icon' => $v['icon'] ?: 'bi-newspaper',
-            'ringkasan' => $v['ringkasan'], 'konten' => $v['konten'], 'views' => $v['views'] ?? 0,
+            'kategori_id' => $kat->id,
+            'judul' => $v['judul'],
+            'kategori' => $kategoriName,
+            'icon' => $v['icon'] ?: 'bi-newspaper',
+            'ringkasan' => $v['ringkasan'],
+            'konten' => $v['konten'],
+            'views' => $v['views'] ?? 0,
             'is_published' => $request->boolean('is_published'),
         ];
     }

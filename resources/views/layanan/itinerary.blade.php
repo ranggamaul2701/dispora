@@ -114,33 +114,6 @@
     border-color: var(--primary);
     transform: translateY(-2px);
 }
-
-/* Print Styles */
-@media print {
-    header, footer, nav, .page-banner, .btn-d, .wa-float, #splash, .scroll-top, .no-print {
-        display: none !important;
-    }
-    body {
-        background: #fff !important;
-        color: #000 !important;
-    }
-    .print-only {
-        display: block !important;
-    }
-    .itin-print-header {
-        display: block !important;
-        border-bottom: 2px solid #000;
-        padding-bottom: 12px;
-        margin-bottom: 20px;
-    }
-    .itin-timeline-item {
-        border: 1px solid #ccc !important;
-        page-break-inside: avoid;
-    }
-}
-.print-only {
-    display: none;
-}
 </style>
 @endpush
 
@@ -156,20 +129,8 @@
 <section class="section-pad bg-soft">
 <div class="container">
 
-    {{-- KOP CETAK (PRINT ONLY) --}}
-    <div class="itin-print-header print-only">
-        <div style="display:flex;align-items:center;gap:16px">
-            <img src="{{ asset('images/logo/logo-disporapar.png') }}" style="height:60px" alt="Logo">
-            <div>
-                <h3 style="margin:0;font-weight:800;font-size:1.3rem">Rencana Perjalanan Wisata Kota Samarinda</h3>
-                <p style="margin:0;font-size:.85rem;color:#555">Dinas Kepemudaan, Olahraga dan Pariwisata Kota Samarinda</p>
-                <div id="printTripInfo" style="font-size:.82rem;font-weight:600;margin-top:4px"></div>
-            </div>
-        </div>
-    </div>
-
-    {{-- REKOMENDASI PRESET ITINERARY (NO-PRINT) --}}
-    <div class="box mb-4 no-print" data-aos="fade-up">
+    {{-- REKOMENDASI PRESET ITINERARY --}}
+    <div class="box mb-4" data-aos="fade-up">
         <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
             <div>
                 <h5 class="box-title mb-1" style="font-size:1rem"><i class="bi bi-compass-fill text-primary me-2"></i>Rekomendasi Paket Rencana Wisata (1-Klik Siap Pakai)</h5>
@@ -195,8 +156,8 @@
 
     {{-- FORM DATA PERJALANAN & KONTROL HARI --}}
     <div class="row g-4">
-        {{-- KOLOM KIRI: KATALOG DESTINASI (NO-PRINT) --}}
-        <div class="col-lg-4 no-print">
+        {{-- KOLOM KIRI: KATALOG DESTINASI --}}
+        <div class="col-lg-4">
             <div class="box" style="position:sticky;top:90px">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h5 class="box-title mb-0" style="font-size:.95rem"><i class="bi bi-geo-alt-fill text-primary me-2"></i>Pilih Destinasi</h5>
@@ -254,7 +215,7 @@
         {{-- KOLOM KANAN: ITINERARY BUILDER --}}
         <div class="col-lg-8">
             {{-- Header Perjalanan --}}
-            <div class="box mb-3 no-print">
+            <div class="box mb-3">
                 <div class="row g-3 align-items-end">
                     <div class="col-md-5">
                         <label class="form-label-x">Nama Rencana Perjalanan</label>
@@ -266,10 +227,7 @@
                     </div>
                     <div class="col-md-4 d-flex gap-2">
                         <button class="btn-d btn-blue flex-fill justify-content-center py-2" onclick="bagikanItinWA()" title="Kirim ke WhatsApp">
-                            <i class="bi bi-whatsapp"></i> Bagikan
-                        </button>
-                        <button class="btn-d btn-light-d py-2 px-3" onclick="window.print()" title="Cetak Rencana">
-                            <i class="bi bi-printer"></i>
+                            <i class="bi bi-whatsapp"></i> Bagikan ke WhatsApp
                         </button>
                         <button class="btn-d btn-light-d py-2 px-3 text-danger" onclick="resetSemua()" title="Kosongkan Rencana">
                             <i class="bi bi-trash"></i>
@@ -279,7 +237,7 @@
             </div>
 
             {{-- Tab Hari --}}
-            <div class="d-flex align-items-center gap-2 mb-3 flex-wrap no-print">
+            <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
                 <div id="dayTabsContainer" class="d-flex gap-2 flex-wrap">
                     {{-- Diisi secara dinamis oleh JS --}}
                 </div>
@@ -311,7 +269,7 @@
                 {{-- Diisi dinamis --}}
             </div>
 
-            <div class="no-print mt-3 text-center">
+            <div class="mt-3 text-center">
                 <button class="btn btn-outline-primary border-dashed w-100 py-3 fw-bold" style="border-radius:14px;background:#F8FBFF" onclick="scrollKeKatalog()">
                     <i class="bi bi-plus-lg me-1"></i> Tambah Destinasi Lagi ke Hari Ini
                 </button>
@@ -649,12 +607,6 @@ function renderSummaryBar() {
         totalJam += match ? +match[1] : 1.5;
     });
     document.getElementById('barDurasi').textContent = (totalJam > 0 ? totalJam + ' Jam' : '0 Jam');
-
-    // Update Print Info
-    var pInfo = document.getElementById('printTripInfo');
-    if (pInfo) {
-        pInfo.textContent = document.getElementById('tripNama').value + ' • Tanggal: ' + document.getElementById('tripTgl').value + ' • Total ' + plan.length + ' Hari';
-    }
 }
 
 function renderTimeline() {
@@ -678,7 +630,7 @@ function renderTimeline() {
         html += '<div class="itin-timeline-item">'
             + '<div class="d-flex flex-column align-items-center gap-1" style="flex-shrink:0">'
                 + '<input type="time" class="itin-time-picker" value="' + it.jam + '" onchange="updateJam(' + idx + ', this.value)" title="Ubah jam">'
-                + '<div class="d-flex flex-column gap-1 mt-1 no-print">'
+                + '<div class="d-flex flex-column gap-1 mt-1">'
                     + (idx > 0 ? '<button class="itin-order-btn" onclick="geserUrutan(' + idx + ', -1)" title="Geser ke atas"><i class="bi bi-chevron-up"></i></button>' : '')
                     + (idx < items.length - 1 ? '<button class="itin-order-btn" onclick="geserUrutan(' + idx + ', 1)" title="Geser ke bawah"><i class="bi bi-chevron-down"></i></button>' : '')
                 + '</div>'
@@ -690,7 +642,7 @@ function renderTimeline() {
                         + '<span class="pill blue py-0 px-2 mb-1" style="font-size:.7rem">' + escHtml(it.kategori || 'Destinasi') + '</span>'
                         + '<h6 style="font-weight:800;color:var(--primary);margin:2px 0 0;font-size:1rem">' + escHtml(it.nama) + '</h6>'
                     + '</div>'
-                    + '<button class="btn btn-sm btn-link text-danger p-0 no-print" onclick="hapusDestinasi(' + idx + ')" title="Hapus dari jadwal">'
+                    + '<button class="btn btn-sm btn-link text-danger p-0" onclick="hapusDestinasi(' + idx + ')" title="Hapus dari jadwal">'
                         + '<i class="bi bi-trash" style="font-size:1.1rem"></i>'
                     + '</button>'
                 + '</div>'
@@ -701,12 +653,11 @@ function renderTimeline() {
                     + '<span><i class="bi bi-geo-alt text-danger me-1"></i>' + escHtml(it.alamat) + '</span>'
                 + '</div>'
 
-                + '<div class="no-print">'
+                + '<div>'
                     + '<input type="text" class="form-control form-control-sm" style="font-size:.78rem;border-radius:8px;background:#F8FBFF" '
                         + 'placeholder="Tambahkan catatan perjalanan (mis: bawa kamera, beli tiket online)..." '
                         + 'value="' + escHtml(it.catatan || '') + '" oninput="updateCatatan(' + idx + ', this.value)">'
                 + '</div>'
-                + (it.catatan ? '<div class="print-only mt-1" style="font-size:.8rem;color:#444"><strong>Catatan:</strong> ' + escHtml(it.catatan) + '</div>' : '')
             + '</div>'
         + '</div>';
     });

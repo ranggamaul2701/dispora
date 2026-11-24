@@ -1,0 +1,23 @@
+PANDUAN MENJALANKAN WEBSITE PARIWISATA SAMARINDA
+
+PENTING: backup folder project lama sebelum menyalin file. Jangan menimpa file .env lama jika berisi konfigurasi pribadi; sesuaikan DB_DATABASE, DB_USERNAME, dan DB_PASSWORD sendiri.
+
+1. Ekstrak folder disporapar-baru ke C:\xampp\htdocs\disporapar-baru (atau folder kerja Laravel Anda).
+2. Jalankan XAMPP: Apache dan MySQL.
+3. Buka phpMyAdmin, buat database bernama disporapar_db dengan collation utf8mb4_unicode_ci.
+4. Di folder project, salin .env.example menjadi .env jika belum ada. Pastikan konfigurasi DB_CONNECTION=mysql, DB_DATABASE=disporapar_db, DB_USERNAME=root, DB_PASSWORD= (kosong jika MySQL XAMPP Anda tidak memakai password).
+5. Jalankan terminal di folder project:
+   composer install
+   php artisan key:generate   (hanya jika APP_KEY kosong)
+   php artisan optimize:clear
+   php artisan migrate:fresh --seed
+   php artisan storage:link
+   php artisan serve
+6. Buka http://127.0.0.1:8000
+7. Login admin: admin@disporapar.go.id / Admin@2025
+
+PERINGATAN: migrate:fresh menghapus semua tabel di database yang dikonfigurasi. Gunakan hanya database lokal untuk project ini dan backup data penting lebih dahulu.
+
+Jika halaman style tidak muncul dan project menggunakan Vite, jalankan npm install lalu npm run dev (terminal kedua). Jika ekstensi PHP yang diperlukan tidak aktif, aktifkan extension=fileinfo, mbstring, openssl, pdo_mysql, tokenizer, xml, ctype, json, curl, dan dom pada php.ini XAMPP, lalu restart Apache/terminal.
+
+Project ini merupakan prototipe informasi pariwisata, bukan website resmi yang telah dipasang oleh DISPORAPAR.

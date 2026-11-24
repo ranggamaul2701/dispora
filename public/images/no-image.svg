@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" fill="none">
+    <rect width="600" height="400" fill="#EBF3FC" rx="12"/>
+    <rect x="2" y="2" width="596" height="396" stroke="#BBD7F5" stroke-width="3" rx="10"/>
+    <circle cx="300" cy="165" r="55" fill="#D8EAF9"/>
+    <path d="M280 145H290L293 140H307L310 145H320C323.3 145 326 147.7 326 151V181C326 184.3 323.3 187 320 187H280C276.7 187 274 184.3 274 181V151C274 147.7 276.7 145 280 145Z" fill="#1976D2"/>
+    <circle cx="300" cy="166" r="12" fill="#EBF3FC"/>
+    <text x="300" y="255" text-anchor="middle" font-family="Segoe UI, Roboto, sans-serif" font-weight="700" font-size="20" fill="#1976D2">Belum Ada Foto</text>
+    <text x="300" y="285" text-anchor="middle" font-family="Segoe UI, Roboto, sans-serif" font-weight="500" font-size="14" fill="#64748B">Pariwisata Samarinda</text>
+</svg>

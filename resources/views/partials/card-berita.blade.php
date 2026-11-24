@@ -1,6 +1,6 @@
 <div class="news-card">
     <a href="{{ route('berita.show', $b->slug) }}" style="display:block;height:210px;overflow:hidden;background:var(--sky)">
-        <img src="{{ media_url($b->gambar, 'berita') }}" alt="{{ $b->judul }}" class="news-card-img" loading="lazy">
+        <img src="{{ media_url($b->gambar, 'berita') }}" alt="{{ $b->judul }}" class="news-card-img" loading="lazy" onerror="this.src='{{ asset('images/hero/hero-bg-1.jpg') }}'">
     </a>
     <div class="card-body-x">
         <span class="news-kategori">{{ $b->kategori }}</span>

@@ -47,6 +47,17 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <div class="container">&copy; {{ date('Y') }} <span>Bidang Pengembangan Pariwisata — Disporapar Kota Samarinda</span>. Hak cipta dilindungi.</div>
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>&copy; {{ date('Y') }} <span>Bidang Pengembangan Pariwisata — Disporapar Kota Samarinda</span>. Hak cipta dilindungi.</div>
+            @guest
+                <a href="{{ route('login') }}" class="text-white-50 text-decoration-none" style="font-size:.76rem" title="Khusus Pengelola / Petugas">
+                    <i class="bi bi-shield-lock me-1"></i>Login Petugas
+                </a>
+            @else
+                <a href="{{ route('admin.dashboard') }}" class="text-white-50 text-decoration-none" style="font-size:.76rem">
+                    <i class="bi bi-speedometer2 me-1"></i>Panel Admin
+                </a>
+            @endguest
+        </div>
     </div>
 </footer>

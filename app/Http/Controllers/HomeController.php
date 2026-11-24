@@ -12,10 +12,19 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $agenda = Agenda::published()
+            ->whereRaw('COALESCE(tanggal_selesai, tanggal_mulai) >= CURDATE()')
+            ->orderBy('tanggal_mulai')
+            ->take(4)->get();
+
+        if ($agenda->isEmpty()) {
+            $agenda = Agenda::published()->orderByDesc('tanggal_mulai')->take(4)->get();
+        }
+
         return view('home.index', [
             'destinasi' => Destinasi::published()->orderByDesc('rating')->take(6)->get(),
             'berita'    => Berita::published()->latest()->take(3)->get(),
-            'agenda'    => Agenda::published()->whereDate('tanggal_selesai', '>=', today())->orderBy('tanggal_mulai')->take(4)->get(),
+            'agenda'    => $agenda,
             'galeri'    => Gallery::featured(8),
         ]);
     }

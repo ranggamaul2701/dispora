@@ -1,6 +1,6 @@
 <div class="dest-card">
     <div class="dest-card-thumb">
-        <img src="{{ media_url($d->gambar, 'destinasi') }}" alt="{{ $d->nama }}" loading="lazy">
+        <img src="{{ media_url($d->gambar, 'destinasi') }}" alt="{{ $d->nama }}" loading="lazy" onerror="this.src='{{ asset('images/no-image.png') }}'">
         <span class="dest-badge">{{ $d->kategori }}</span>
         @if($d->rating > 0)<span class="rating-badge"><i class="bi bi-star-fill text-warning me-1"></i>{{ number_format($d->rating, 1) }}</span>@endif
     </div>

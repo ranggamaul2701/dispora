@@ -5,7 +5,7 @@
 @section('content')
 @include('partials.page-banner', [
     'title' => $berita->judul, 'bgUrl' => media_url($berita->gambar, 'berita'),
-    'badge' => e($berita->icon . ' ' . $berita->kategori),
+    'badge' => e($berita->kategori),
     'crumbs' => [['Berita', route('berita.index')], ['Detail']],
 ])
 
